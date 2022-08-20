@@ -1,0 +1,23 @@
+{
+  "name": "wellread-bookclub-app",
+  "version": "1.0.0",
+  "description": "This is an app that will be dedicated to book lovers. This app serves as a database to organize books according to \"books read\", \"currently reading\" and \"want to read.\"",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dorene-StMarthe/WellRead-BookClub-App.git"
+  },
+  "keywords": [],
+  "author": "Dorene",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Dorene-StMarthe/WellRead-BookClub-App/issues"
+  },
+  "homepage": "https://github.com/Dorene-StMarthe/WellRead-BookClub-App#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
