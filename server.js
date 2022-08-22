@@ -8,7 +8,8 @@ const books = require('./models/books.js')
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
-
+//public css
+app.use(express.static('public'));
 
 //index route
 app.get('/wellread', ( req, res )=>{
