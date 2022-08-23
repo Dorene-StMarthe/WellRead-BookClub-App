@@ -12,15 +12,15 @@
                 <a href = '/wellread/<%=i%>'>
                 <%=allBooks[i].title%>
             </a>
-            <form>
+            <form action="/wellread/<%=i%>?_method=DELETE" method="POST">
                 <input type="submit" value="DELETE"/>
             </form>
-            <% } %>     
-           
+            <a href="/wellread<%=book[i].indexOfBooksArray; %>/edit">Edit</a>
             </li>
-          
+            <% } %>
     </ul>
     <nav>
+
         <a href="/wellread/new">Add a New Book</a>
     </nav>
     </div>

@@ -1,5 +1,7 @@
 const express = require('express');
 const app= express();
+const methodOverride = require('method-override')
+app.use(methodOverride('_method'))
 
 const books = require('./models/books.js')
 //console.log(books)
@@ -9,6 +11,9 @@ const books = require('./models/books.js')
 //Import the mongoose module
 const mongoose = require('mongoose');
 const BookSchema = require('./models/data.js');
+
+//method override- Delete requests
+
 
 //Set up default mongoose connection
 const mongoDB = 'mongodb://localhost:27017/' + 'reads'
@@ -27,13 +32,12 @@ db.on('disconnected', () => console.log('mongo disconnected'))
 
 
 
+
 //middleware
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
-//method override- Delete requests
-const methodOverride = require('method-override')
-app.use(methodOverride('_method'))
+
 
 
 //public css
@@ -87,7 +91,28 @@ app.post('/wellread', (req, res) =>{
 
 //delete route
 app.delete('/wellread/:indexOfBooksArray', (req, res)=>{
-    res.send('deleting...')
+    books.splice(req.params.indexOfBooksArray, 1)
+        // if (err) console.log(err)
+        res.redirect('/wellread') //redirect back to fruits index
+    })
+
+
+//edit
+app.get('/wellread/:indexOfBooksArray/edit', (req, res)=>{
+    BookSchema.findById(req.params.id, (err, foundBook)=>{ 
+        res.render(
+    		'edit.ejs',
+    		{book: foundBook 
+            })
+        })
+    })
+
+//PUT route
+app.put('/wellread/:indexOfBooksArray', (req, res)=>{
+    res.send(req.body)
+BookSchema.findByIdAndUpdate(req.params.indexOfBooksArray, req.body, {new:true}, (err, updatedModel)=>{
+    res.redirect('/wellread')
+})
 })
 
 
@@ -99,7 +124,6 @@ app.get('/wellread/:indexOfBooksArray', (req, res) =>{
   })
 });
 
-  
   app.listen(3000), () => {
     console.log('Server is listening!!')
   }
