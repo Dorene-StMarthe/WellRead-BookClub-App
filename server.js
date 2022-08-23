@@ -10,16 +10,18 @@ const BookSchema = require('./models/data.js');
 
 //Set up default mongoose connection
 const mongoDB = 'mongodb://localhost:27017/' + 'reads'
-mongoose.connect(mongoDB), () => {
+mongoose.connect(mongoDB, () => {
     console.log('the connection with mongod is established')
-  }
+  })
 
 //Get the default connection
 const db = mongoose.connection;
 
 //Bind connection to error event (to get notification of connection errors)
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
+db.on('error', (err) => console.log(err.message + ' is Mongod not running?'))
+db.on('connected', () => console.log('mongo connected: ', mongoDB))
+db.on('disconnected', () => console.log('mongo disconnected'))
 
 
 
