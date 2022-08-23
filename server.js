@@ -4,6 +4,25 @@ const app= express();
 const books = require('./models/books.js')
 //console.log(books)
 
+//Import the mongoose module
+const mongoose = require('mongoose');
+const BookSchema = require('./models/data.js');
+
+//Set up default mongoose connection
+const mongoDB = 'mongodb://localhost:27017/' + 'reads'
+mongoose.connect(mongoDB), () => {
+    console.log('the connection with mongod is established')
+  }
+
+//Get the default connection
+const db = mongoose.connection;
+
+//Bind connection to error event (to get notification of connection errors)
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+
+
+
+
 //middleware
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
@@ -43,6 +62,5 @@ app.get('/wellread/:indexOfBooksArray', (req, res) =>{
   
   app.listen(3000), () => {
     console.log('Server is listening!!')
-    
   }
 
