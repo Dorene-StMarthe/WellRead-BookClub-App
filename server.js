@@ -32,6 +32,22 @@ app.use(express.urlencoded({extended: true}))
 //public css
 app.use(express.static('public'));
 
+//create a document with mongoose
+// BookSchema.create(books , (error, data) => {
+//     if (error) { // if there is an error console log it
+//       console.log(error)
+//     } else { // else show us the created tweet
+//       console.log(tweet)
+//     }
+//     // get control of terminal back
+//     // you can also just use control-c
+//     db.close()
+//   })
+
+
+
+
+
 //index route
 app.get('/wellread', ( req, res )=>{
     res.render('index.ejs', {
