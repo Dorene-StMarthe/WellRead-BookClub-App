@@ -12,8 +12,13 @@
                 <a href = '/wellread/<%=i%>'>
                 <%=allBooks[i].title%>
             </a>
+            <form>
+                <input type="submit" value="DELETE"/>
+            </form>
+            <% } %>     
+           
             </li>
-          <% } %>     
+          
     </ul>
     <nav>
         <a href="/wellread/new">Add a New Book</a>

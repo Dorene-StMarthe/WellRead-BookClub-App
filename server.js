@@ -4,6 +4,8 @@ const app= express();
 const books = require('./models/books.js')
 //console.log(books)
 
+// const booksControl = require('./controllers/booksControl.js')
+
 //Import the mongoose module
 const mongoose = require('mongoose');
 const BookSchema = require('./models/data.js');
@@ -29,30 +31,46 @@ db.on('disconnected', () => console.log('mongo disconnected'))
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
+//method override- Delete requests
+const methodOverride = require('method-override')
+app.use(methodOverride('_method'))
+
+
 //public css
 app.use(express.static('public'));
 
 
+// app.use('/wellread', booksControl)
+
+
+//home page
+app.get('/wellread-home', (req, res) => {
+    res.send(`
+        <h1>Welcome to the Well-Read BookClub App!</h1>
+        <p>Get inspired by books Today!</p>
+    `);
+});
+
 //index route
 app.get('/wellread', ( req, res )=>{
-    BookSchema.find({}, (error, allBooks)=>{
-    res.render('index.ejs', {
-        allBooks: books
-    });
+  BookSchema.find({}, (error, allBooks)=>{
+  res.render('index.ejs', {
+      allBooks: books
   });
 });
-  
+});
+
 //new route
 app.get('/wellread/new', (req, res) => {
-    res.render('new.ejs')
+  res.render('new.ejs')
 })
 
-  
+
 //create POST route
 app.post('/wellread', (req, res) =>{
-    console.log(req.body)
-    books.push(req.body)
-    res.redirect('/wellread')
+  console.log(req.body)
+  books.push(req.body)
+  res.redirect('/wellread')
 })
 
 // //create a document with mongoose
@@ -67,11 +85,18 @@ app.post('/wellread', (req, res) =>{
 //     db.close()
 //   })
 
+//delete route
+app.delete('/wellread/:indexOfBooksArray', (req, res)=>{
+    res.send('deleting...')
+})
+
+
+
 //show route
 app.get('/wellread/:indexOfBooksArray', (req, res) =>{
-    res.render('show.ejs', {
-        book: books[req.params.indexOfBooksArray]
-    })
+  res.render('show.ejs', {
+      book: books[req.params.indexOfBooksArray]
+  })
 });
 
   
