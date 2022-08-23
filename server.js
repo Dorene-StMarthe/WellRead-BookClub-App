@@ -32,29 +32,15 @@ app.use(express.urlencoded({extended: true}))
 //public css
 app.use(express.static('public'));
 
-//create a document with mongoose
-// BookSchema.create(books , (error, data) => {
-//     if (error) { // if there is an error console log it
-//       console.log(error)
-//     } else { // else show us the created tweet
-//       console.log(tweet)
-//     }
-//     // get control of terminal back
-//     // you can also just use control-c
-//     db.close()
-//   })
-
-
-
-
 
 //index route
 app.get('/wellread', ( req, res )=>{
+    BookSchema.find({}, (error, allBooks)=>{
     res.render('index.ejs', {
         allBooks: books
-    })
+    });
   });
-
+});
   
 //new route
 app.get('/wellread/new', (req, res) => {
@@ -68,8 +54,19 @@ app.post('/wellread', (req, res) =>{
     books.push(req.body)
     res.redirect('/wellread')
 })
-  
-  
+
+// //create a document with mongoose
+// BookSchema.create(books , (error, data) => {
+//     if (error) { // if there is an error console log it
+//       console.log(error)
+//     } else { // else show us the created tweet
+//       console.log(tweet)
+//     }
+//     // get control of terminal back
+//     // you can also just use control-c
+//     db.close()
+//   })
+
 //show route
 app.get('/wellread/:indexOfBooksArray', (req, res) =>{
     res.render('show.ejs', {
