@@ -8,6 +8,11 @@ const books = require('./models/books.js')
 
 // const booksControl = require('./controllers/booksControl.js')
 
+
+// const testCTrl =require('./controllers/booksControl.js');
+
+
+
 //Import the mongoose module
 const mongoose = require('mongoose');
 const BookSchema = require('./models/data.js');
@@ -102,7 +107,7 @@ app.get('/wellread/:indexOfBooksArray/edit', (req, res)=>{
     BookSchema.findById(req.params.id, (err, foundBook)=>{ 
         res.render(
     		'edit.ejs',
-    		{book: foundBook 
+    		{book: books
             })
         })
     })
@@ -115,14 +120,24 @@ BookSchema.findByIdAndUpdate(req.params.indexOfBooksArray, req.body, {new:true},
 })
 })
 
-
-
 //show route
 app.get('/wellread/:indexOfBooksArray', (req, res) =>{
-  res.render('show.ejs', {
-      book: books[req.params.indexOfBooksArray]
-  })
+  BookSchema.findById(req.params.indexOfBooksArray, (err, foundBook) => {
+      res.render('show.ejs', {
+       book: foundBook
+      });
+    });
 });
+
+
+
+//       book: books[req.params.indexOfBooksArray, (err, foundBook => {
+//         res.send(foundBook);
+//       })]
+//   })
+// });
+
+// app.use('/posts', testCtrl)
 
   app.listen(3000), () => {
     console.log('Server is listening!!')
