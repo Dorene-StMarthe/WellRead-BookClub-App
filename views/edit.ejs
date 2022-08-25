@@ -5,7 +5,9 @@
 </head>
 <body>
     <h1>Edit Book Page</h1>
-    <form action="/wellread/<%=book.indexOfBooksArray%>?_method=PUT" method="POST">
+    <p>
+        <%=book.indexOfBooksArray%>
+    <form action="/wellread/<%= book.i%>?_method=PUT" method="POST">
         <label for="title">Title</label>
         <input type="text" name="title" id="title"/>
         <label for="author">Author</label>
@@ -16,6 +18,6 @@
         <input type="text" name="rating" id="rating" />
         <input type="submit" value="Submit Changes">
       </form>
-
+    </p>
 </body>
 </html>

@@ -37,7 +37,6 @@ db.on('disconnected', () => console.log('mongo disconnected'))
 
 
 
-
 //middleware
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
@@ -82,25 +81,25 @@ app.post('/wellread', (req, res) =>{
   res.redirect('/wellread')
 })
 
-// //create a document with mongoose
+//create a document with mongoose
 // BookSchema.create(books , (error, data) => {
-//     if (error) { // if there is an error console log it
+//     if (error) { 
 //       console.log(error)
-//     } else { // else show us the created tweet
+//     } else { 
 //       console.log(tweet)
 //     }
-//     // get control of terminal back
-//     // you can also just use control-c
+
 //     db.close()
 //   })
 
 //delete route
 app.delete('/wellread/:indexOfBooksArray', (req, res)=>{
     books.splice(req.params.indexOfBooksArray, 1)
-        // if (err) console.log(err)
-        res.redirect('/wellread') //redirect back to fruits index
-    })
-
+        
+    BookSchema.findByIdAndRemove(req.params.indexOfBooksArray, (err, data)=>{
+      res.redirect('/wellread') //redirect back to fruits index
+  })
+})
 
 //edit
 app.get('/wellread/:indexOfBooksArray/edit', (req, res)=>{
@@ -114,9 +113,9 @@ app.get('/wellread/:indexOfBooksArray/edit', (req, res)=>{
 
 //PUT route
 app.put('/wellread/:indexOfBooksArray', (req, res)=>{
-    res.send(req.body)
-BookSchema.findByIdAndUpdate(req.params.indexOfBooksArray, req.body, {new:true}, (err, updatedModel)=>{
-    res.redirect('/wellread')
+BookSchema.findByIdAndUpdate(req.params.indexOfBooksArray, req.body, (err, updatedModel)=>{
+  // res.send(updatedModel)
+  res.redirect('/wellread')
 })
 })
 
@@ -124,7 +123,7 @@ BookSchema.findByIdAndUpdate(req.params.indexOfBooksArray, req.body, {new:true},
 app.get('/wellread/:indexOfBooksArray', (req, res) =>{
   BookSchema.findById(req.params.indexOfBooksArray, (err, foundBook) => {
       res.render('show.ejs', {
-       book: foundBook
+       book:books
       });
     });
 });

@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
 //Define a schema
-const Schema = mongoose.Schema;
-const BookInfoSchema = new Schema({
+
+const bookInfoSchema = new mongoose.Schema({
     title: { type: String, required: true, unique: true },
         author: { type: String, required: true },
         genre: String,
@@ -12,6 +12,6 @@ const BookInfoSchema = new Schema({
   }, { timestamps: true })
 
 
-  const BookSchema = mongoose.model('BookSchema', BookInfoSchema);
+  const BookSchema = mongoose.model('BookSchema', bookInfoSchema);
 
-  module.exports = BookSchema
+  module.exports = BookSchema;
