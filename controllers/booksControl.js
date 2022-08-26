@@ -1,17 +1,22 @@
-// const express = require('express');
-// const router = express.Router();
+const express = require('express');
+const router = express.Router();
 
 // const mdb = require('../models');
 // const { db } = require('.../models/data');
 
-//   //home page
-//   router.get('/', (req, res) => {
-//     db.Post.find()
-//     res.send(`
-//         <h1>Welcome to the Well-Read BookClub App!</h1>
-//         <p>Get inspired by books Today!</p>
-//     `);
-// });
+
+app.get('/', (req, res) => {
+    res.send(`
+        <h1>Welcome to the Well-Read BookClub App!</h1>
+        <p>Get inspired by books Today!</p>
+    `);
+});
+
+
+
+
+
+
 
 // //index route
 // router.get('/wellread', ( req, res )=>{
@@ -57,4 +62,4 @@
 
 
 
-module.exports = router;
+module.exports = router

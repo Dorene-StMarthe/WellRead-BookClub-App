@@ -1,23 +1,15 @@
 const express = require('express');
-const app= express();
+const app = express();
+const BookSchema = require('./models/data.js');
 const methodOverride = require('method-override')
-app.use(methodOverride('_method'))
+
 
 const books = require('./models/books.js')
 //console.log(books)
 
-// const booksControl = require('./controllers/booksControl.js')
-
-
-// const testCTrl =require('./controllers/booksControl.js');
-
-
 
 //Import the mongoose module
 const mongoose = require('mongoose');
-const BookSchema = require('./models/data.js');
-
-//method override- Delete requests
 
 
 //Set up default mongoose connection
@@ -39,10 +31,8 @@ db.on('disconnected', () => console.log('mongo disconnected'))
 
 //middleware
 app.use(express.json())
-app.use(express.urlencoded({extended: true}))
-
-
-
+app.use(express.urlencoded({extended: false}))
+app.use(methodOverride('_method'))
 
 //public css
 app.use(express.static('public'));
@@ -52,12 +42,60 @@ app.use(express.static('public'));
 
 
 //home page
-app.get('/wellread-home', (req, res) => {
+app.get('/', (req, res) => {
     res.send(`
         <h1>Welcome to the Well-Read BookClub App!</h1>
         <p>Get inspired by books Today!</p>
     `);
 });
+app.get('/wellread/seed', (req, res) => {
+  BookSchema.create(
+[ 
+  {
+      title: 'Roll of Thunder Hear My Cry', 
+      author: 'Mildred D. Taylor',
+      genre: 'Historical Fiction',
+      pages: '288',
+      review: 'Macchiato, robusta steamed acerbic, crema sugar café au lait a ristretto. Dripper, bar macchiato flavour strong extraction coffee dark cortado. Froth, foam instant et iced and wings. Robusta beans qui steamed roast whipped percolator robust instant. Decaffeinated, affogato aroma dark at half and half roast.',
+      rating : '5'
+  },
+  {
+      title: 'The Fire Next Time', 
+      author: 'James Baldwin',
+      genre: 'Non-Fiction/Essay',
+      pages: '128',
+      review: 'Macchiato, robusta steamed acerbic, crema sugar café au lait a ristretto. Dripper, bar macchiato flavour strong extraction coffee dark cortado. Froth, foam instant et iced and wings. Robusta beans qui steamed roast whipped percolator robust instant. Decaffeinated, affogato aroma dark at half and half roast.',
+      rating: '4'
+  },
+  
+  {
+      title: 'Beloved',  
+      author:'Toni Morrison',
+      genre: 'Historical Fiction and Magical Realism',
+      pages: '324',
+      review: 'Macchiato, robusta steamed acerbic, crema sugar café au lait a ristretto. Dripper, bar macchiato flavour strong extraction coffee dark cortado. Froth, foam instant et iced and wings. Robusta beans qui steamed roast whipped percolator robust instant. Decaffeinated, affogato aroma dark at half and half roast.',
+      rating : '4'
+  },
+  {
+      title: 'The Brief Wondrous Life of Oscar Wao', 
+      author: 'Junot Diaz',
+      genre: 'Domestic Fiction',
+      pages: '352',
+      review: 'Macchiato, robusta steamed acerbic, crema sugar café au lait a ristretto. Dripper, bar macchiato flavour strong extraction coffee dark cortado. Froth, foam instant et iced and wings. Robusta beans qui steamed roast whipped percolator robust instant. Decaffeinated, affogato aroma dark at half and half roast.',
+      rating : '5',
+  },
+  {  
+      title: 'Americanah',
+      author: 'Chimamanda Ngozi Adichie',
+      genre: 'Fiction',
+      pages: '608',
+      review: 'Macchiato, robusta steamed acerbic, crema sugar café au lait a ristretto. Dripper, bar macchiato flavour strong extraction coffee dark cortado. Froth, foam instant et iced and wings. Robusta beans qui steamed roast whipped percolator robust instant. Decaffeinated, affogato aroma dark at half and half roast.',
+      rating : '4',
+  }
+]
+
+)})
+
 
 //index route
 app.get('/wellread', ( req, res )=>{
@@ -113,9 +151,9 @@ app.get('/wellread/:indexOfBooksArray/edit', (req, res)=>{
 
 //PUT route
 app.put('/wellread/:indexOfBooksArray', (req, res)=>{
-BookSchema.findByIdAndUpdate(req.params.indexOfBooksArray, req.body, (err, updatedModel)=>{
-  // res.send(updatedModel)
-  res.redirect('/wellread')
+BookSchema.findOneAndUpdate(req.params.indexOfBooksArray, req.body, {new:true}, (err, updatedModel)=>{
+  res.send(updatedModel)
+  // res.redirect('/wellread')
 })
 })
 
@@ -123,20 +161,11 @@ BookSchema.findByIdAndUpdate(req.params.indexOfBooksArray, req.body, (err, updat
 app.get('/wellread/:indexOfBooksArray', (req, res) =>{
   BookSchema.findById(req.params.indexOfBooksArray, (err, foundBook) => {
       res.render('show.ejs', {
-       book:books
+      book:books
       });
     });
 });
 
-
-
-//       book: books[req.params.indexOfBooksArray, (err, foundBook => {
-//         res.send(foundBook);
-//       })]
-//   })
-// });
-
-// app.use('/posts', testCtrl)
 
   app.listen(3000), () => {
     console.log('Server is listening!!')
