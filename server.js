@@ -112,6 +112,21 @@ app.delete('/wellread/:id', (req, res) => {
     })
 })
 
+//edit route
+app.get('/wellread/:id/edit', (req, res)=> {
+    Book.findById(req.params.id, (err, foundBook) => {
+        res.render('edit.ejs', { book:foundBook
+        })
+    })
+})
+
+//put route
+app.put('/wellread/:id', (req, res)=> {
+    Book.findByIdAndUpdate(req.params.id, req.body, {new:true}, (err, updatedModel) => {
+        res.redirect('/wellread')
+    })
+})
+
 //show route
 app.get('/wellread/:id', (req, res)=>{
     Book.findById(req.params.id, (err, foundBook)=>{
