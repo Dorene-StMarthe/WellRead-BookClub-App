@@ -4,13 +4,15 @@ require('dotenv').config()
 const port = process.env.PORT;
 const methodOverride = require('method-override')
 
+const booksController = require('./controllers/routes.js')
+
 //import Model
 const Book = require('./models/books.js')
 
 
 //mongodb connection
 const mongoose = require('mongoose');
-const { deleteOne, deleteMany } = require('./models/books.js');
+
 
 //Global configuration
 const mongoURI = 'mongodb://127.0.0.1:27017/'+ 'bookschemas'
@@ -31,8 +33,10 @@ db.on('disconnected', () => {console.log('mongo disconneccted')})
 //middleware
 app.use(express.urlencoded({extended:true}));
 app.use(methodOverride('_method'))
+app.use('/wellread', booksController)
 
 
+//default
 app.get('/', (req, res) => {
     res.send('Hello World');
 });
@@ -76,65 +80,65 @@ app.get('/', (req, res) => {
 
 
 
-//new route
-app.get('/wellread/new', (req, res)=>{
-    res.render('new.ejs');
-});
+// //new route
+// app.get('/wellread/new', (req, res)=>{
+//     res.render('new.ejs');
+// });
 
-//create route
-app.post('/wellread/', (req, res)=>{
-Book.create(req.body, (err, createdBook)=>{
-    // res.redirect('/wellread')
-    if (err){
-        console.log(err)
-        res.send(err);
-    }
-    else{
-        res.send(createdBook);
-        console.log(createdBook)
-    } 
-})});
+// //create route
+// app.post('/wellread/', (req, res)=>{
+// Book.create(req.body, (err, createdBook)=>{
+//     // res.redirect('/wellread')
+//     if (err){
+//         console.log(err)
+//         res.send(err);
+//     }
+//     else{
+//         res.send(createdBook);
+//         console.log(createdBook)
+//     } 
+// })});
 
 
-//index route
-app.get('/wellread',(req, res)=> {
-    Book.find({},(error, allBooks)=>{
-    res.render('index.ejs', {
-     books: allBooks
-        })
-    })
-})
+// //index route
+// app.get('/wellread',(req, res)=> {
+//     Book.find({},(error, allBooks)=>{
+//     res.render('index.ejs', {
+//      books: allBooks
+//         })
+//     })
+// })
 
-//delete route
-app.delete('/wellread/:id', (req, res) => {
-    Book.findByIdAndRemove(req.params.id, (err, data) => {
-        res.redirect('/wellread')
-    })
-})
+// //delete route
+// app.delete('/wellread/:id', (req, res) => {
+//     Book.findByIdAndRemove(req.params.id, (err, data) => {
+//         res.redirect('/wellread')
+//     })
+// })
 
-//edit route
-app.get('/wellread/:id/edit', (req, res)=> {
-    Book.findById(req.params.id, (err, foundBook) => {
-        res.render('edit.ejs', { book:foundBook
-        })
-    })
-})
+// //edit route
+// app.get('/wellread/:id/edit', (req, res)=> {
+//     Book.findById(req.params.id, (err, foundBook) => {
+//         res.render('edit.ejs', { book:foundBook
+//         })
+//     })
+// })
 
-//put route
-app.put('/wellread/:id', (req, res)=> {
-    Book.findByIdAndUpdate(req.params.id, req.body, {new:true}, (err, updatedModel) => {
-        res.redirect('/wellread')
-    })
-})
+// //put route
+// app.put('/wellread/:id', (req, res)=> {
+//     Book.findByIdAndUpdate(req.params.id, req.body, {new:true}, (err, updatedModel) => {
+//         res.redirect('/wellread')
+//     })
+// })
 
-//show route
-app.get('/wellread/:id', (req, res)=>{
-    Book.findById(req.params.id, (err, foundBook)=>{
-        res.render('show.ejs', {
-            book: foundBook
-        });
-    });
-});
+// //show route
+// app.get('/wellread/:id', (req, res)=>{
+//     Book.findById(req.params.id, (err, foundBook)=>{
+//         res.render('show.ejs', {
+//             book: foundBook
+//         });
+//     });
+// });
 
 // update
 // Book.findOneAndUpdate({genre: 'Non-Fiction/Essay'}, {genre: 'Essay'}, 
@@ -150,8 +154,6 @@ app.get('/wellread/:id', (req, res)=>{
 //     console.log(books)
 //     db.close
 // })
-
-
 
 
 
