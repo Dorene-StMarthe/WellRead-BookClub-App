@@ -83,6 +83,7 @@ app.get('/wellread/new', (req, res)=>{
 //create route
 app.post('/wellread/', (req, res)=>{
 Book.create(req.body, (err, createdBook)=>{
+    // res.redirect('/wellread')
     if (err){
         console.log(err)
         res.send(err);
@@ -94,18 +95,23 @@ Book.create(req.body, (err, createdBook)=>{
 })});
 
 
-
-
-
 //index route
 app.get('/wellread',(req, res)=> {
     Book.find({},(error, allBooks)=>{
     res.render('index.ejs', {
-     allBooks
+     books: allBooks
         })
     })
 })
 
+//show route
+app.get('/wellread/:id', (req, res)=>{
+    Book.findById(req.params.id, (err, foundBook)=>{
+        res.render('show.ejs', {
+            book: foundBook
+        });
+    });
+});
 
 // update
 // Book.findOneAndUpdate({genre: 'Non-Fiction/Essay'}, {genre: 'Essay'}, 
@@ -117,10 +123,10 @@ app.get('/wellread',(req, res)=> {
 //     }
 // })
 
-Book.find((err, books)=> {
-    console.log(books)
-    db.close
-})
+// Book.find((err, books)=> {
+//     console.log(books)
+//     db.close
+// })
 
 
 

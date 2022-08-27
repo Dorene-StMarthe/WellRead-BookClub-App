@@ -11,9 +11,14 @@
     <ul>
         <% for(let i = 0; i < books.length; i++){ %>
             <li>
-                <%=books[i].title; %> 
+                <a href="/wellread/<%=books[i].id; %>">
+                    <%=books[i].title; %> 
+                </a>
             </li>
         <% } %>
     </ul>
+    <nav>
+        <a href="/wellread/new">New Book Entry</a>
+    </nav>
 </body>
 </html>
