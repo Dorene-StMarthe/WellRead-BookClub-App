@@ -9,6 +9,7 @@ const Book = require('./models/books.js')
 
 //mongodb connection
 const mongoose = require('mongoose');
+const { deleteOne, deleteMany } = require('./models/books.js');
 
 //Global configuration
 const mongoURI = 'mongodb://127.0.0.1:27017/'+ 'bookschemas'
@@ -73,10 +74,6 @@ app.get('/', (req, res) => {
 // ]
 
 
-Book.find((err, books)=> {
-    console.log(books)
-    db.close
-})
 
 //new route
 app.get('/wellread/new', (req, res)=>{
@@ -84,18 +81,49 @@ app.get('/wellread/new', (req, res)=>{
 });
 
 //create route
-// app.post('/wellread/', (req, res)=>{
-// Book.create(books, (err, createdBook)=>{
-//     if (err){
+app.post('/wellread/', (req, res)=>{
+Book.create(req.body, (err, createdBook)=>{
+    if (err){
+        console.log(err)
+        res.send(err);
+    }
+    else{
+        res.send(createdBook);
+        console.log(createdBook)
+    } 
+})});
+
+
+
+
+
+//index route
+app.get('/wellread',(req, res)=> {
+    Book.find({},(error, allBooks)=>{
+    res.render('index.ejs', {
+     allBooks
+        })
+    })
+})
+
+
+// update
+// Book.findOneAndUpdate({genre: 'Non-Fiction/Essay'}, {genre: 'Essay'}, 
+// , (err, book) => {
+//     if(err) {
 //         console.log(err)
-//         // res.send(err);
+//     }else {
+//         console.log(book)
 //     }
-//     else{
-//         // res.send(createdBook);
-//         console.log(createdBook)
-//     }
-//     db.close()
 // })
+
+Book.find((err, books)=> {
+    console.log(books)
+    db.close
+})
+
+
+
 
 
 // //create many
@@ -111,14 +139,17 @@ app.get('/wellread/new', (req, res)=>{
 
 
 
-//index route
-app.get('/wellread',(req, res)=> {
-    Book.find({},(error, allBooks)=>{
-    res.render('index.ejs', {
-     allBooks
-        })
-    })
-})
+
+//Delete
+// Book.findOneAndRemove({title: 'd'}, 
+//     (err, book) => {
+//         if (err) {
+//             console.log(err)
+//         }else {
+//             console.log(book)
+//         }
+//     db.close()
+//     })
 
 app.listen(port, () => {
     console.log("I am listening on port", port)
