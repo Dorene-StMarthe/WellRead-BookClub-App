@@ -2,18 +2,29 @@ const express = require('express')
 const app = express();
 require('dotenv').config()
 const port = process.env.PORT;
+
+//import Model
 const Book = require('./models/books.js')
 
 
 //mongodb connection
 const mongoose = require('mongoose');
 
-//... and then farther down the file
-mongoose.connect('mongodb://127.0.0.1:27017/basiccrud', { useNewUrlParser: true});
-mongoose.connection.once('open', ()=> {
-    console.log('connected to mongo');
-});
+//Global configuration
+const mongoURI = 'mongodb://127.0.0.1:27017/'+ 'bookschemas'
+const db = mongoose.connection
 
+//connect to Mongo
+mongoose.connect(mongoURI, () => {
+    console.log('the connection with mongod is establisehed')
+})
+
+
+db.on('error', (err)=> {console.log(err.message + 'is mongodnod running?')})
+db.on('connected', () => { console.log('congo connected: ', mongoURI)})
+db.on('disconnected', () => {console.log('mongo disconneccted')})
+
+// db.close()
 
 //middleware
 app.use(express.urlencoded({extended:true}));
@@ -61,7 +72,14 @@ Book.create(req.body, (error, createdBook)=>{
     }
 })});
 
-
+//index route
+app.get('/wellread',(req, res)=> {
+    Book.find({},(error, allBooks)=>{
+    res.render('index.ejs', {
+     allBooks
+        })
+    })
+})
 
 app.listen(port, () => {
     console.log("I am listening on port", port)
