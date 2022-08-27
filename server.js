@@ -2,6 +2,7 @@ const express = require('express')
 const app = express();
 require('dotenv').config()
 const port = process.env.PORT;
+const methodOverride = require('method-override')
 
 //import Model
 const Book = require('./models/books.js')
@@ -29,7 +30,7 @@ db.on('disconnected', () => {console.log('mongo disconneccted')})
 
 //middleware
 app.use(express.urlencoded({extended:true}));
-
+app.use(methodOverride('_method'))
 
 
 app.get('/', (req, res) => {
@@ -101,6 +102,13 @@ app.get('/wellread',(req, res)=> {
     res.render('index.ejs', {
      books: allBooks
         })
+    })
+})
+
+//delete route
+app.delete('/wellread/:id', (req, res) => {
+    Book.findByIdAndRemove(req.params.id, (err, data) => {
+        res.redirect('/wellread')
     })
 })
 
