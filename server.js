@@ -2,6 +2,21 @@ const express = require('express')
 const app = express();
 require('dotenv').config()
 const port = process.env.PORT;
+const Book = require('./models/books.js')
+
+
+//mongodb connection
+const mongoose = require('mongoose');
+
+//... and then farther down the file
+mongoose.connect('mongodb://127.0.0.1:27017/basiccrud', { useNewUrlParser: true});
+mongoose.connection.once('open', ()=> {
+    console.log('connected to mongo');
+});
+
+
+//middleware
+app.use(express.urlencoded({extended:true}));
 
 
 
@@ -33,6 +48,19 @@ const books =[
 app.get('/wellread/new', (req, res)=>{
     res.render('new.ejs');
 });
+
+//create route
+app.post('/wellread/', (req, res)=>{
+Book.create(req.body, (error, createdBook)=>{
+    if (error){
+        console.log(error);
+        res.send(error);
+    }
+    else{
+        res.send(createdBook);
+    }
+})});
+
 
 
 app.listen(port, () => {
