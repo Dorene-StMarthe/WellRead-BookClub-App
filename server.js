@@ -35,25 +35,48 @@ app.get('/', (req, res) => {
     res.send('Hello World');
 });
 
-const books =[
-{
-    title: 'Roll of Thunder Hear My Cry', 
-    author: 'Mildred D. Taylor',
-    genre: 'Historical Fiction',
-    pages: 288,
-    review: 'Macchiato, robusta steamed acerbic, crema sugar café au lait a ristretto. Dripper, bar macchiato flavour strong extraction coffee dark cortado. Froth, foam instant et iced and wings. Robusta beans qui steamed roast whipped percolator robust instant. Decaffeinated, affogato aroma dark at half and half roast.',
-    rating : '5'
-},
-{
-    title: 'The Fire Next Time', 
-    author: 'James Baldwin',
-    genre: 'Non-Fiction/Essay',
-    pages: 128,
-    review: 'Macchiato, robusta steamed acerbic, crema sugar café au lait a ristretto. Dripper, bar macchiato flavour strong extraction coffee dark cortado. Froth, foam instant et iced and wings. Robusta beans qui steamed roast whipped percolator robust instant. Decaffeinated, affogato aroma dark at half and half roast.',
-    rating: '4'
-},
-]
+// const books = [
 
+// {
+//     title: 'The Fire Next Time', 
+//     author: 'James Baldwin',
+//     genre: 'Non-Fiction/Essay',
+//     pages: 128,
+//     review: 'Macchiato, robusta steamed acerbic, crema sugar café au lait a ristretto. Dripper, bar macchiato flavour strong extraction coffee dark cortado. Froth, foam instant et iced and wings. Robusta beans qui steamed roast whipped percolator robust instant. Decaffeinated, affogato aroma dark at half and half roast.',
+//     rating: '4'
+// },
+
+// {
+//     title: 'Beloved',  
+//     author:'Toni Morrison',
+//     genre: 'Historical Fiction and Magical Realism',
+//     pages: 324,
+//     review: 'Macchiato, robusta steamed acerbic, crema sugar café au lait a ristretto. Dripper, bar macchiato flavour strong extraction coffee dark cortado. Froth, foam instant et iced and wings. Robusta beans qui steamed roast whipped percolator robust instant. Decaffeinated, affogato aroma dark at half and half roast.',
+//     rating : '4'
+// },
+// {
+//     title: 'The Brief Wondrous Life of Oscar Wao', 
+//     author: 'Junot Diaz',
+//     genre: 'Domestic Fiction',
+//     pages: 352,
+//     review: 'Macchiato, robusta steamed acerbic, crema sugar café au lait a ristretto. Dripper, bar macchiato flavour strong extraction coffee dark cortado. Froth, foam instant et iced and wings. Robusta beans qui steamed roast whipped percolator robust instant. Decaffeinated, affogato aroma dark at half and half roast.',
+//     rating : '5',
+// },
+// {  
+//     title: 'Americanah',
+//     author: 'Chimamanda Ngozi Adichie',
+//     genre: 'Fiction',
+//     pages: 608,
+//     review: 'Macchiato, robusta steamed acerbic, crema sugar café au lait a ristretto. Dripper, bar macchiato flavour strong extraction coffee dark cortado. Froth, foam instant et iced and wings. Robusta beans qui steamed roast whipped percolator robust instant. Decaffeinated, affogato aroma dark at half and half roast.',
+//     rating : '4',
+// }
+// ]
+
+
+Book.find((err, books)=> {
+    console.log(books)
+    db.close
+})
 
 //new route
 app.get('/wellread/new', (req, res)=>{
@@ -61,16 +84,32 @@ app.get('/wellread/new', (req, res)=>{
 });
 
 //create route
-app.post('/wellread/', (req, res)=>{
-Book.create(req.body, (error, createdBook)=>{
-    if (error){
-        console.log(error);
-        res.send(error);
-    }
-    else{
-        res.send(createdBook);
-    }
-})});
+// app.post('/wellread/', (req, res)=>{
+// Book.create(books, (err, createdBook)=>{
+//     if (err){
+//         console.log(err)
+//         // res.send(err);
+//     }
+//     else{
+//         // res.send(createdBook);
+//         console.log(createdBook)
+//     }
+//     db.close()
+// })
+
+
+// //create many
+// Book.insertMany(books, (err, createdBooks) =>{
+//     if(err) {
+//         console.log(error)
+//     } else{
+//         console.log(createdBooks)
+//     }
+//     db.close()
+
+//     })
+
+
 
 //index route
 app.get('/wellread',(req, res)=> {
