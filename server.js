@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express();
 require('dotenv').config()
-const port = process.env.PORT;
+const port = process.env.PORT || 3000;
 const methodOverride = require('method-override')
 
 const booksController = require('./controllers/routes.js')
@@ -15,17 +15,25 @@ const mongoose = require('mongoose');
 
 
 //Global configuration
-const mongoURI = 'mongodb://127.0.0.1:27017/'+ 'bookschemas'
+// const mongoURI = 'mongodb://127.0.0.1:27017/'+ 'bookschemas'
 const db = mongoose.connection
 
 //connect to Mongo
-mongoose.connect(mongoURI, () => {
-    console.log('the connection with mongod is establisehed')
-})
+mongoose
+    .connect(process.env.MONGODB_URI)
+    .then(() => {
+    console.log(`Mongodb connected at ${db.port}:${db.host}`)
+    })
+    .catch((err) => console.log(err))
+
+// //connect to Mongo
+// mongoose.connect(mongoURI, () => {
+//     console.log('the connection with mongod is establisehed')
+// })
 
 
 db.on('error', (err)=> {console.log(err.message + 'is mongodnod running?')})
-db.on('connected', () => { console.log('congo connected: ', mongoURI)})
+db.on('connected', () => { console.log('mongo connected: ')})
 db.on('disconnected', () => {console.log('mongo disconneccted')})
 
 // db.close()
@@ -40,6 +48,7 @@ app.use('/wellread', booksController)
 app.get('/', (req, res) => {
     res.send('Hello World');
 });
+
 
 // const books = [
 

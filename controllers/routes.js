@@ -3,8 +3,6 @@ const router = express.Router()
 const Book = require('../models/books.js')
 
 
-
-
 //new route
 router.get('/new', (req, res)=>{
     res.render('new.ejs');
