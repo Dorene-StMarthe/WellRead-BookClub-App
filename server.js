@@ -42,7 +42,7 @@ db.on('disconnected', () => {console.log('mongo disconneccted')})
 app.use(express.urlencoded({extended:true}));
 app.use(methodOverride('_method'))
 app.use('/wellread', booksController)
-
+app.use(express.json())
 
 //default
 app.get('/', (req, res) => {

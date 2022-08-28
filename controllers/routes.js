@@ -11,15 +11,15 @@ router.get('/new', (req, res)=>{
 //create route
 router.post('/', (req, res)=>{
 Book.create(req.body, (err, createdBook)=>{
-    // res.redirect('/wellread')
-    if (err){
-        console.log(err)
-        res.send(err);
-    }
-    else{
-        res.send(createdBook);
-        console.log(createdBook)
-    } 
+    res.redirect('/wellread')
+    // if (err){
+    //     console.log(err)
+    //     res.send(err);
+    // }
+    // else{
+    //     res.send(createdBook);
+    //     console.log(createdBook)
+    // } 
 })});
 
 
@@ -47,7 +47,7 @@ router.get('/:id/edit', (req, res)=> {
     })
 })
 
-//put route
+//update route
 router.put('/:id', (req, res)=> {
     Book.findByIdAndUpdate(req.params.id, req.body, {new:true}, (err, updatedModel) => {
         res.redirect('/wellread')
