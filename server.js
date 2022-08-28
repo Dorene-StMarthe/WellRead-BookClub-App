@@ -3,7 +3,9 @@ const app = express();
 require('dotenv').config()
 const port = process.env.PORT || 3000;
 const methodOverride = require('method-override')
-
+const session = require('express-session')
+const SESSION_SECRET= process.env.SESSION_SECRET
+console.log("this is " + SESSION_SECRET)
 const booksController = require('./controllers/routes.js')
 
 //import Model
@@ -11,13 +13,13 @@ const Book = require('./models/books.js')
 
 
 //mongodb connection
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 
 
 //Global configuration
 // const mongoURI = 'mongodb://127.0.0.1:27017/'+ 'bookschemas'
 const db = mongoose.connection
-
+const mongodbURI = process.env.MONGODB_URI
 //connect to Mongo
 mongoose
     .connect(process.env.MONGODB_URI)
@@ -32,9 +34,9 @@ mongoose
 // })
 
 
-db.on('error', (err)=> {console.log(err.message + 'is mongodnod running?')})
-db.on('connected', () => { console.log('mongo connected: ')})
-db.on('disconnected', () => {console.log('mongo disconneccted')})
+db.on('error', (err)=> {console.log(err.message + 'is mongodb running?')})
+db.on('connected', () => { console.log('mongo connected')})
+db.on('disconnected', () => {console.log('mongo disconnected')})
 
 // db.close()
 
@@ -44,6 +46,12 @@ app.use(methodOverride('_method'))
 app.use('/wellread', booksController)
 app.use(express.json())
 app.use(express.static('public'));
+//sessions
+app.use(session({
+    secret: SESSION_SECRET,
+    resave: false, 
+    saveUninitialized: false
+}))
 
 //default
 app.get('/', (req, res) => {
@@ -192,6 +200,6 @@ app.get('/', (req, res) => {
 //     db.close()
 //     })
 
-app.listen(port, () => {
-    console.log("I am listening on port", port)
+app.listen(process.env.PORT, () => {
+    console.log("I am listening on port " + port)
 })
