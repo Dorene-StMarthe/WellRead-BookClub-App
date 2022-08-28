@@ -43,6 +43,7 @@ app.use(express.urlencoded({extended:true}));
 app.use(methodOverride('_method'))
 app.use('/wellread', booksController)
 app.use(express.json())
+app.use(express.static('public'));
 
 //default
 app.get('/', (req, res) => {
