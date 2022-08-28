@@ -53,10 +53,13 @@ app.use(session({
     saveUninitialized: false
 }))
 
+const userController = require('./controllers/userController.js')
+app.use('/users', userController)
+
 //default
-app.get('/', (req, res) => {
-    res.send('Hello World');
-});
+// app.get('/', (req, res) => {
+//     res.send('Hello World');
+// });
 
 
 // const books = [
