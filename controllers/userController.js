@@ -16,13 +16,20 @@ router.post('/register', (req, res) => {
 
 User.findOne({username: req.body.username}, (err, userExists) => {
     if(userExists) {
-        res.send("that usernaem is taken")
+        res.send("that username is taken")
     } else {
         User.create(req.body, (err, createdUser) => {
-            console.log(createdUser)
+            // console.log(createdUser)
             res.send('user created')
-          })
- }
+            })
+        }
+    })
 })
+
+
+router.get('/signin', (req, res) => {
+    res.render('users/signin.ejs')
 })
+
+
 module.exports = router
