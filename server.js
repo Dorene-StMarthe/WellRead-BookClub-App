@@ -46,6 +46,8 @@ app.use(methodOverride('_method'))
 app.use('/wellread', booksController)
 app.use(express.json())
 app.use(express.static('public'));
+// app.use('/css', express.static('BookClubPic.jpg'));
+
 //sessions
 app.use(session({
     secret: SESSION_SECRET,
