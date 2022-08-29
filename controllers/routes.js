@@ -12,6 +12,12 @@ const Book = require('../models/books.js')
 //     }
 // }
 
+//landing page route
+router.get('/', (req, res)=>{
+    res.render('landing.ejs');
+});
+
+
 //new route
 router.get('/new', (req, res)=>{
     res.render('new.ejs');
@@ -20,7 +26,7 @@ router.get('/new', (req, res)=>{
 //create route
 router.post('/', (req, res)=>{
 Book.create(req.body, (err, createdBook)=>{
-    res.redirect('/wellread')
+    res.redirect('/wellread/index')
     // if (err){
     //     console.log(err)
     //     res.send(err);
@@ -33,7 +39,7 @@ Book.create(req.body, (err, createdBook)=>{
 
 
 //index route
-router.get('/', async (req, res)=> {
+router.get('/index', async (req, res)=> {
     Book.find({},(error, allBooks)=>{
     res.render('index.ejs', {
      books: allBooks
@@ -44,7 +50,7 @@ router.get('/', async (req, res)=> {
 //delete route
 router.delete('/:id', (req, res) => {
     Book.findByIdAndRemove(req.params.id, (err, data) => {
-        res.redirect('/wellread')
+        res.redirect('/wellread/index')
     })
 })
 
@@ -59,7 +65,7 @@ router.get('/:id/edit', (req, res) => {
 //update route
 router.put('/:id', (req, res)=> {
     Book.findByIdAndUpdate(req.params.id, req.body, {new:true}, (err, updatedModel) => {
-        res.redirect('/wellread')
+        res.redirect('/wellread/index')
     })
 })
 

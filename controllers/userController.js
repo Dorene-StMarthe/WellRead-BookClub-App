@@ -29,7 +29,7 @@ User.findOne({username: req.body.username}, (err, userExists) => {
 
 
 router.get('/signin', (req, res) => {
-    res.render('users/signin.ejs')
+    res.render('./users/signin.ejs')
 })
 
 router.post('/signin', (req, res) => {
@@ -51,7 +51,7 @@ router.post('/signin', (req, res) => {
 //Destroy session route
 router.get('/signout', (req, res)=>{
     req.session.destroy()
-    res.redirect('./wellread')
+    res.redirect('/wellread')
 })
 
 module.exports = router
