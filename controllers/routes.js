@@ -2,6 +2,15 @@ const express = require('express')
 const router = express.Router()
 const Book = require('../models/books.js')
 
+//custom middleware
+// const authRequired = (req, res, next) => {
+//     if(req.session.currentUser){
+//         next()
+//     }else {
+//         res.send('you must be logged in to do that')
+
+//     }
+// }
 
 //new route
 router.get('/new', (req, res)=>{
@@ -40,7 +49,7 @@ router.delete('/:id', (req, res) => {
 })
 
 //edit route
-router.get('/:id/edit', (req, res)=> {
+router.get('/:id/edit', (req, res) => {
     Book.findById(req.params.id, (err, foundBook) => {
         res.render('edit.ejs', { book:foundBook
         })
