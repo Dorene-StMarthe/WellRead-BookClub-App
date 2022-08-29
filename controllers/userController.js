@@ -20,7 +20,8 @@ User.findOne({username: req.body.username}, (err, userExists) => {
     } else {
         User.create(req.body, (err, createdUser) => {
             // console.log(createdUser)
-            res.send('user created')
+            // res.send('user created')
+            res.redirect('/wellread')
             })
         }
     })
@@ -31,5 +32,26 @@ router.get('/signin', (req, res) => {
     res.render('users/signin.ejs')
 })
 
+router.post('/signin', (req, res) => {
+    User.findOne({username:req.body.username }, (err, foundUser)=>{
+        if (foundUser) {
+            const validLogin = bcrypt.compareSync(req.body.password, foundUser.password)
+            if(validLogin){
+                req.session.currentUser = foundUser
+                res.send('user logged in')
+            }else{
+                res.send('Invalid password or username')
+            }
+        }else{
+            res.send('Invalid username or password')
+        }
+    })
+})
+
+//Destroy session route
+router.get('/signout', (req, res)=>{
+    req.session.destroy()
+    res.redirect('./wellread')
+})
 
 module.exports = router
