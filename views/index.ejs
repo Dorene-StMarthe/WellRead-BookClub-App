@@ -7,9 +7,11 @@
 </head>
 <body style="background-image: url('https://images.unsplash.com/photo-1536965764833-5971e0abed7c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80');">
     
-    <h1 class="text-white text-center text-4xl">Be Inspired Today</h1>
-    <div class = "bg-orange-100/80 bg-center rounded-lg text-center max-w-5xl max-h-fit">
-    <ul>
+    <h1 class="text-white text-center text-5xl">Be Inspired Today</h1>
+    <br>
+    <div class="bookList">
+    <div class = " items-center bg-orange-100/80 rounded-lg text-center ">
+    <ul >
         <% for(let i = 0; i < books.length; i++){ %>
             <li>
                 <a href="/wellread/<%=books[i].id; %>">
@@ -17,6 +19,7 @@
                 </a>
                 <div class="inline-flex text-yellow-700 p-2">
                 <button><a href="/wellread/<%=books[i].id; %>/edit">EDIT</a></button>
+                
                 <form action="/wellread/<%=books[i].id %>?_method=DELETE" method="POST">
                     <input type="submit" value="DELETE"/>
                 </form>
@@ -27,6 +30,7 @@
     <nav>
         <a href="/wellread/new">New Book Entry</a>
     </nav>
+    </div>
     </div>
 </body>
 </html>

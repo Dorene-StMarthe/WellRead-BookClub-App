@@ -38,7 +38,7 @@ router.post('/signin', (req, res) => {
             const validLogin = bcrypt.compareSync(req.body.password, foundUser.password)
             if(validLogin){
                 req.session.currentUser = foundUser
-                res.send('user logged in')
+                res.redirect('/wellread/index')
             }else{
                 res.send('Invalid password or username')
             }
