@@ -4,16 +4,22 @@
     <%- include ('./partials/head.ejs') %>
 </head>
 <body>
-    <h1>Books Show Page</h1>
-    <h3><%=book.title%></h3><br>
-        <%=book.author%><br>
-        <%=book.genre%><br>
-        <%=book.pages%><br>
-        <%=book.review%><br>
-        <%=book.rating%><br>
-        <hr>
-    <nav>
-        <a href="/wellread/index">Back to Index</a>
-    </nav>  
+    <div class="grid grid-cols-2 bg-cover py-20">
+    <div class="flex items-center justify-center bg-white " >
+        <p class="text-yellow-600 text-5xl"><%=book.title%></p>
+    </div>
+    <div class="px-24 bg-yellow-600 py-12 font-sans text-lg antialiased">
+        <p class="underline text-white text-xl">Author: <%=book.author%></p><br>
+        <p class="text-amber-400"> Genre: <%=book.genre%></p><br>
+        <p class="">No. of Pages: <%=book.pages%> </p><br>
+        <p class="font-medium">Review: <%=book.review%></p><br>
+        <p class="font-semibold">Rating: <%=book.rating%></p><br>
+        <nav class="flex justify-end hover:text-white">
+            <a href="/wellread/index" class="cursor-pointer" >Back to Index</a>
+        </nav> 
+    </div>
+       </div>
+   
+
 </body>
 </html>

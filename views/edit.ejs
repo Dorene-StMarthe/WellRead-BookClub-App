@@ -4,7 +4,6 @@
     <%- include ('./partials/head.ejs') %>
 </head>
 <body>
-    <h1>Edit Book Page</h1>
     <form action="/wellread/<%=book.id%>?_method=PUT" method="POST" class="flex items-center justify-center">
         <label for="title">title</label><br>
         <input type="text" id="title" name="title" value="<%=book.title%>"/><br>
@@ -16,7 +15,7 @@
         <input type="text" id="pages" name="pages" value="<%=book.pages%>"/><br>
         <label for="review">review</label><br>
         <input type="text" id="review" name="review" value="<%=book.review%>"/><br>
-        <input type="submit" value="Submit Changes">     
+        <input type="submit" value="Submit Changes" class="cursor-pointer">     
     </form>
 </body>
 </html>

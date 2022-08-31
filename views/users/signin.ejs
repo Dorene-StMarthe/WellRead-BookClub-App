@@ -4,7 +4,7 @@
     <%- include ('../partials/head.ejs') %>
     <title>User Sign-In</title>
 </head>
-<body>
+<body class="">
     <h1 class="flex items-center justify-center ">Login</h1>
     <div class="flex items-center justify-center">
     <form class="input-field col s6" action="/users/signin" method="POST">
@@ -16,7 +16,7 @@
             <label for="password">Password:</label>
             <input type="password" name="password">
         </fieldset>
-        <input type="submit" value="Sign In">  
+        <input class="cursor-pointer" type="submit" value="Sign In">  
     </form>
     </div>
 </body>
