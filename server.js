@@ -205,6 +205,6 @@ app.use('/users', userController)
 //     db.close()
 //     })
 
-app.listen(process.env.PORT, () => {
-    console.log("I am listening on port " + port)
+app.listen(3000, () => {
+    console.log("I am listening on port" + port);
 })
