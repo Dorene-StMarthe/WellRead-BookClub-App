@@ -10,10 +10,10 @@ const booksController = require('./controllers/routes.js')
 
 //import Model
 const Book = require('./models/books.js')
-
+ 
 
 //mongodb connection
-const mongoose = require('mongoose')
+const mongoose =require('mongoose')
 
 
 //Global configuration
