@@ -58,6 +58,10 @@ app.use(session({
 const userController = require('./controllers/userController.js')
 app.use('/users', userController)
 
+app.get('/', (req, res) => {
+    res.redirect('/wellread')
+})
+
 //default
 // app.get('/', (req, res) => {
 //     res.send('Hello World');
