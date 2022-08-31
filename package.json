@@ -4,7 +4,8 @@
   "description": "This is an app that will be dedicated to book lovers. This app serves as a database to organize books according to \"books read\", \"currently reading\" and \"want to read.\"",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
