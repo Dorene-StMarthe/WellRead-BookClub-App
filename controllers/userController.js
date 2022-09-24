@@ -21,7 +21,7 @@ User.findOne({username: req.body.username}, (err, userExists) => {
         User.create(req.body, (err, createdUser) => {
             // console.log(createdUser)
             // res.send('user created')
-            res.redirect('/wellread')
+            res.redirect('/wellread/index')
             })
         }
     })
