@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="/public/css/app.css">  
     <%- include ('./partials/head.ejs') %>
 </head>
 <body  >
     <h1>New Books Page</h1>
-    
-    <form action = "/wellread/" method="POST">
+   <div>
+    <form action = "/wellread" method="POST" class ="text-center py-10" >
             <label for="title">Title</label><br>
             <input type="text" id="title" name="title" class="border border-amber-600 rounded-md" ><br>
             <label for="author">Author</label><br>
@@ -14,13 +15,13 @@
             <label for="genre">Genre</label><br>
             <input type="text" id="genre" name="genre" class="border border-amber-600 rounded-md"><br>
             <label for="pages">Pages</label><br>
-            <input type="text" id="pages" name="pages" class="border border-amber-600 rounded-md"><br>
+            <input type="number" id="pages" name="pages" class="border border-amber-600 rounded-md"><br>
             <label for="review">Review</label><br>
             <input type="text" id="review" name=" review"class="border border-amber-600 rounded-md"><br>
             <label for="rating">Rating</label><br>
             <input type="number" id="rating" name="rating"class="border border-amber-600 rounded-md"><br>
-            <input type="submit" value="Submit" class="cursor-pointer">     
+            <input type="submit" value="Submit" class="cursor-pointer  transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300  ">     
     </form>
-
+</div>
 </body>
 </html>

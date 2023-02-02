@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express();
+const Book = require('./models/books.js')
 require('dotenv').config()
 const port = process.env.PORT || 3000;
 const methodOverride = require('method-override')
@@ -9,7 +10,6 @@ console.log("this is " + SESSION_SECRET)
 const booksController = require('./controllers/routes.js')
 
 //import Model
-const Book = require('./models/books.js')
  
 
 //mongodb connection
@@ -41,10 +41,11 @@ db.on('disconnected', () => {console.log('mongo disconnected')})
 // db.close()
 
 //middleware
-app.use(express.urlencoded({extended:true}));
+
 app.use(methodOverride('_method'))
 app.use('/wellread', booksController)
 app.use(express.json())
+app.use(express.urlencoded({extended:true}));
 app.use(express.static('public'));
 // app.use('/css', express.static('BookClubPic.jpg'));
 
@@ -210,5 +211,5 @@ app.get('/', (req, res) => {
 //     })
 
 app.listen(port, () => {
-    console.log("I am listening on port" + port);
+    console.log("I am listening on port " + port);
 })

@@ -23,18 +23,28 @@ router.get('/new', (req, res)=>{
     res.render('new.ejs');
 });
 
+
+
+//delete route
+router.delete('/:id', (req, res) => {
+    Book.findByIdAndRemove(req.params.id, (err, data) => {
+        res.redirect('/wellread/index')
+    })
+})
+
 //create route
 router.post('/', (req, res)=>{
 Book.create(req.body, (err, createdBook)=>{
     res.redirect('/wellread/index')
-    // if (err){
-    //     console.log(err)
-    //     res.send(err);
-    // }
-    // else{
-    //     res.send(createdBook);
-    //     console.log(createdBook)
-    // } 
+     //if (err){
+    console.log(err)
+         //res.send(err);
+     //}
+     //else{
+         //res.send(createdBook);
+         console.log(createdBook)
+     //} 
+    
 })});
 
 
@@ -42,15 +52,8 @@ Book.create(req.body, (err, createdBook)=>{
 router.get('/index', async (req, res)=> {
     Book.find({},(error, allBooks)=>{
     res.render('index.ejs', {
-     books: allBooks
+     books: allBooks,
         })
-    })
-})
-
-//delete route
-router.delete('/:id', (req, res) => {
-    Book.findByIdAndRemove(req.params.id, (err, data) => {
-        res.redirect('/wellread/index')
     })
 })
 
@@ -62,9 +65,11 @@ router.get('/:id/edit', (req, res) => {
     })
 })
 
+
 //update route
 router.put('/:id', (req, res)=> {
-    Book.findByIdAndUpdate(req.params.id, req.body, {new:true}, (err, updatedModel) => {
+    Book.findByIdAndUpdate(req.params.id, req.body, {new:true}, (err, 
+        updatedModel) => {
         res.redirect('/wellread/index')
     })
 })
@@ -77,6 +82,4 @@ router.get('/:id', (req, res)=>{
         });
     });
 });
-
-
-module.exports=router
+module.exports = router

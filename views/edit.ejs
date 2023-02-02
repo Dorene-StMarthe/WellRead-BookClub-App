@@ -6,15 +6,15 @@
 <body>
     <div class="flex items-center justify-center">
     <form action="/wellread/<%=book.id%>?_method=PUT" method="POST">
-        <label for="title">title</label><br>
+        <label for="title">Title</label><br>
         <input type="text" id="title" name="title" value="<%=book.title%>"/><br>
-        <label for="author">author</label><br>
+        <label for="author">Author</label><br>
         <input type="text" id="author" name="author" value="<%=book.author%>"/><br>
-        <label for="genre">genre</label><br>
+        <label for="genre">Genre</label><br>
         <input type="text" id="genre" name="genre" value="<%=book.genre%>"/><br>
-        <label for="pages">pages</label><br>
+        <label for="pages">Pages</label><br>
         <input type="text" id="pages" name="pages" value="<%=book.pages%>"/><br>
-        <label for="review">review</label><br>
+        <label for="review">Review</label><br>
         <input type="text" id="review" name="review" value="<%=book.review%>"/><br>
         <input type="submit" value="Submit Changes" class="cursor-pointer"> <br>    
     </form>
