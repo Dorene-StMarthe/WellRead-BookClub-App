@@ -23,7 +23,7 @@ router.get('/new', (req, res)=>{
     res.render('new.ejs');
 });
 
-
+//show route
 
 //delete route
 router.delete('/:id', (req, res) => {
@@ -35,6 +35,7 @@ router.delete('/:id', (req, res) => {
 //create route
 router.post('/', (req, res)=>{
 Book.create(req.body, (err, createdBook)=>{
+    
     res.redirect('/wellread/index')
      //if (err){
     console.log(err)
@@ -51,8 +52,8 @@ Book.create(req.body, (err, createdBook)=>{
 //index route
 router.get('/index', async (req, res)=> {
     Book.find({},(error, allBooks)=>{
-    res.render('index.ejs', {
-     books: allBooks,
+    res.render('index.ejs',{
+     books:allBooks
         })
     })
 })
@@ -74,12 +75,13 @@ router.put('/:id', (req, res)=> {
     })
 })
 
-//show route
-router.get('/:id', (req, res)=>{
+router.get('/:id', async (req, res) =>{
     Book.findById(req.params.id, (err, foundBook)=>{
         res.render('show.ejs', {
             book: foundBook
         });
     });
 });
+
+
 module.exports = router
