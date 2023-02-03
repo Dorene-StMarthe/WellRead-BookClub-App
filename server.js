@@ -41,12 +41,11 @@ db.on('disconnected', () => {console.log('mongo disconnected')})
 // db.close()
 
 //middleware
-
+app.use(express.urlencoded({extended:true}));
 app.use(methodOverride('_method'))
 app.use('/wellread', booksController)
-app.use(express.json())
-app.use(express.urlencoded({extended:true}));
 app.use(express.static('public'));
+app.use(express.json())
 // app.use('/css', express.static('BookClubPic.jpg'));
 
 //sessions
