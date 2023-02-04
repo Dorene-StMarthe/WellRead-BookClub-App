@@ -3,20 +3,23 @@
 <head>
     <%- include ('./partials/head.ejs') %>
 </head>
-<body>
-    <div class="flex items-center justify-center">
-    <form action="/wellread/<%=book.id%>?_method=PUT" method="POST">
+<body class="bg-gradient-to-r from-orange-200 ">
+    <h1 class="text-center font-sans text-2xl text-yellow-700">MAKE ANY CHANGES</h1>
+    <div class="flex items-center justify-center text-center py-10 ">
+    <form action="/wellread/<%=book.id%>?_method=PUT" method="POST" class="py-6">
         <label for="title">Title</label><br>
-        <input type="text" id="title" name="title" value="<%=book.title%>"/><br>
+        <input type="text" id="title" name="title" class="p-1 pr-10 border border-amber-600 rounded-md" value="<%=book.title%>"/><br>
         <label for="author">Author</label><br>
-        <input type="text" id="author" name="author" value="<%=book.author%>"/><br>
+        <input type="text" id="author" name="author" class="p-1 pr-10 border border-amber-600 rounded-md" value="<%=book.author%>"/><br>
         <label for="genre">Genre</label><br>
-        <input type="text" id="genre" name="genre" value="<%=book.genre%>"/><br>
+        <input type="text" id="genre" name="genre" class="p-1 pr-10 border border-amber-600 rounded-md" value="<%=book.genre%>"/><br>
         <label for="pages">Pages</label><br>
-        <input type="text" id="pages" name="pages" value="<%=book.pages%>"/><br>
+        <input type="text" id="pages" name="pages" class="p-1 pr-10 border border-amber-600 rounded-md" value="<%=book.pages%>"/><br>
         <label for="review">Review</label><br>
-        <input type="text" id="review" name="review" value="<%=book.review%>"/><br>
-        <input type="submit" value="Submit Changes" class="cursor-pointer"> <br>    
+        <input type="text" id="review" name="review" class="p-1 pr-10 border border-amber-600 rounded-md" value="<%=book.review%>"/><br>
+    <fieldset class="pt-6">
+        <input type="submit" value="Submit Changes" class="cursor-pointer inline-block px-6 py-2.5 text-white active:shadow-lg rounded-md cursor-pointer transition ease-in-out delay-150 bg-amber-600 hover:-translate-y-1 hover:scale-110 hover:bg-amber-500 duration-300" > <br>    
+    </fieldset>
     </form>
 </div>
 </body>
