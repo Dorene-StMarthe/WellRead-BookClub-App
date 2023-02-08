@@ -1,2 +1,9 @@
 .homePic {
     background-image: url("/public/BookClubPic.jpg");}
+
+    @media only screen and (max-width: 600px) {
+        input, button{
+          background-color: lightblue;
+        }
+      }
+
