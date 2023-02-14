@@ -5,6 +5,9 @@ require('dotenv').config()
 const port = process.env.PORT || 3000;
 const methodOverride = require('method-override')
 const session = require('express-session')
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+
 const SESSION_SECRET= process.env.SESSION_SECRET
 console.log("this is " + SESSION_SECRET)
 const booksController = require('./controllers/routes.js')
