@@ -7,6 +7,7 @@ const methodOverride = require("method-override");
 const session = require("express-session");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
+const path = require("path");
 
 const SESSION_SECRET = process.env.SESSION_SECRET;
 console.log("this is " + SESSION_SECRET);
@@ -62,6 +63,9 @@ app.use(
     saveUninitialized: false,
   })
 );
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 const userController = require("./controllers/userController.js");
 app.use("/users", userController);
