@@ -19,8 +19,8 @@
 <div>
     <h2>Dev Dependencies</h2>
         <ul>
-            <li>Prettier</li>
-            <li>ejs</li>
+            <li><a href="https://prettier.io/">Prettier</li>
+            <li><a href="https://ejs.co/">EJS</li>
             <li><a href="https://tailwindcss.com/">Tailwind </li>
         </ul>
 </div>
