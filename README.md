@@ -16,5 +16,11 @@
             <li>Delete book entries</li>
         </ol>
 </div>
+<div>
+    <h2>Dev Dependencies</h2>
+        <ul>
+            <li>Prettier</li>
+        </ul>
+</div>
 
 
