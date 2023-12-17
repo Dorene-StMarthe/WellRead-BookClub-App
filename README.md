@@ -9,17 +9,19 @@
 <div>
     <h2>Features</h2>
     <h4>Users will be able to:</h4>
-        <ol>
+        <ul>
             <li>Create a book entry</li>
             <li>Read and navigate through thier library</li>
             <li>Update and revise entries inputted</li>
             <li>Delete book entries</li>
-        </ol>
+        </ul>
 </div>
 <div>
     <h2>Dev Dependencies</h2>
         <ul>
             <li>Prettier</li>
+            <li>ejs</li>
+            <li><a href="https://tailwindcss.com/">Tailwind </li>
         </ul>
 </div>
 
